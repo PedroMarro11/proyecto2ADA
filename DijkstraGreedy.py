@@ -36,7 +36,7 @@ def DijkstraGreedy(graph, start):
         # Remove the node from the list of nodes to visit
         nodes.remove(min_node)
 
-    return visited, distance[visited[-1]]
+    return visited, distance[visited[-1]], distance
 
 # Example usage
 graph = {
@@ -45,6 +45,7 @@ graph = {
     'C': {'A': 4, 'B': 2, 'D': 1},
     'D': {'B': 5, 'C': 1}
 }
-a, b = DijkstraGreedy(graph, 'A')
+a, b, c = DijkstraGreedy(graph, 'A')
 print("La secuencia es",a)
 print("Con longitud",b)
+print("Y distancias desde el nodo inicial",c)
