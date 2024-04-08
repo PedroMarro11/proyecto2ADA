@@ -1,4 +1,4 @@
-def DijkstraGreedy(graph, start):
+def DijkstraGreedy(graph, start, end):
     # Initialize the distance from the start node to all other nodes
     distance = {node: float('infinity') for node in graph}
     distance[start] = 0
@@ -19,6 +19,10 @@ def DijkstraGreedy(graph, start):
                 min_node = node
             elif distance[node] < distance[min_node]:
                 min_node = node
+
+        if min_node == end:
+            visited.append(min_node)
+            break
         #print(min_node) #descomentar para observar funcionamiento
         # For each neighbor of the node
         for neighbor, weight in graph[min_node].items():
@@ -36,7 +40,7 @@ def DijkstraGreedy(graph, start):
         # Remove the node from the list of nodes to visit
         nodes.remove(min_node)
 
-    return visited, distance[visited[-1]], distance
+    return visited, distance[end], distance
 
 # Example usage
 graph = {
@@ -45,7 +49,7 @@ graph = {
     'C': {'A': 4, 'B': 2, 'D': 1},
     'D': {'B': 5, 'C': 1}
 }
-a, b, c = DijkstraGreedy(graph, 'A')
+a, b, c = DijkstraGreedy(graph, 'A', 'C')
 print("La secuencia es",a)
 print("Con longitud",b)
 print("Y distancias desde el nodo inicial",c)
