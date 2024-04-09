@@ -1,6 +1,10 @@
 import random
 import math 
 def dijkstraDnCv2(graph, start, end = None):
+    #Base case: if just two nodes, return the nodes and the distance between them
+    if len(graph) == 2:
+        x = list(graph)
+        return x, graph[x[0]][x[1]]
     # Base case: if just one node, return that node to visit and distance 0
     if len(graph) == 1:
         return [start], 0
@@ -11,7 +15,15 @@ def dijkstraDnCv2(graph, start, end = None):
     for node in graph:
         if node == start:
             continue
-        min_node = min(graph[node], key = graph[node].get)
+        dist = float('inf')
+        for subnode in graph[node]:
+            if subnode not in graph:
+                continue
+            if subnode == start:
+                continue
+            if graph[node][subnode] < dist:
+                dist = graph[node][subnode]
+                min_node = subnode
         min_dists.append(graph[node][min_node])
         nodes.append((node,min_node))
     
@@ -28,7 +40,10 @@ def dijkstraDnCv2(graph, start, end = None):
     print(first_half)
     print(second_half) 
     # Recursively solve the left and right halves
-    return 0,0
+
+    left_distance = dijkstraDnCv2(first_half, start, sep[0])
+    right_distance = dijkstraDnCv2(second_half, sep[1])
+    return left_distance[0].extend(right_distance[0]), left_distance[1] + right_distance[1]+graph[sep[0]][sep[1]]
 
 
 
@@ -87,3 +102,4 @@ graph = {
     'D': {'B': 1, 'C': 4, "A":10}
 }
 a, b = dijkstraDnCv2(graph, "A")
+print(a, b)
