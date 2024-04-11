@@ -1,6 +1,6 @@
 
 
-def dijkstra(graph, start, end):
+def dijkstradyn(graph, start, end=None):
     # Initialize dictionaries for shortest distance and tracking the visited nodes
     shortest_distances = {node: float('inf') for node in graph}
     shortest_distances[start] = 0
@@ -36,34 +36,12 @@ def dijkstra(graph, start, end):
             return None, None
     path.insert(0, start)
     
-    return shortest_distances[end], path
-
-# Example usage:
-graph = {
-    'A': {'B': 4, 'C': 2},
-    'B': {'A': 4, 'C': 5, 'D': 10},
-    'C': {'A': 2, 'B': 5, 'E': 3, 'F': 4},
-    'D': {'B': 10, 'G': 11},
-    'E': {'C': 3, 'F': 6, 'H': 5},
-    'F': {'C': 4, 'E': 6, 'G': 2},
-    'G': {'D': 11, 'F': 2, 'I': 2, 'H': 10},
-    'H': {'E': 5, 'G': 10, 'I': 3, 'J': 5},
-    'I': {'G': 2, 'H': 3, 'J': 3},
-    'J': {'H': 5, 'I': 3}
-}
-
-start_node = 'A'
-end_node = 'J'
-shortest_distance, path = dijkstra(graph, start_node, end_node)
-print("Shortest distance to", end_node, ":", shortest_distance)
-print("Path:", path)
+    return shortest_distances[str(len(shortest_distances)-1)], path
 
 
-dijkstra(graph, 'A', 'D')
-
-#show graph graphically
+#show graph as image
     
-def showgraph():
+def showgraph(graph):
     import networkx as nx
     import matplotlib.pyplot as plt
 
@@ -73,8 +51,7 @@ def showgraph():
             G.add_edge(node, neighbor, weight=weight)
 
     pos = nx.spring_layout(G)
-    nx.draw(G, pos, with_labels=True, node_size=700, node_color='skyblue')
     labels = nx.get_edge_attributes(G, 'weight')
+    nx.draw(G, pos, with_labels=True, node_size=700, node_color='skyblue', font_size=10, font_weight='bold', font_color='black')
     nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
     plt.show()
-showgraph()
