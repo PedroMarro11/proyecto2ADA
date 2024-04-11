@@ -1,17 +1,17 @@
 
 
 def dijkstradyn(graph, start, end=None):
-    # Initialize dictionaries for shortest distance and tracking the visited nodes
+    # Diccionarios para almacenar las distancias más cortas y los nodos anteriores
     shortest_distances = {node: float('inf') for node in graph}
     shortest_distances[start] = 0
     predecessor = {}
     unseen_nodes = set(graph.keys())
     
     while unseen_nodes:
-        # Select the unvisited node with the smallest distance
+        # Selecciona el nodo no visto con la distancia más corta
         current_node = min(unseen_nodes, key=lambda node: shortest_distances[node])
         
-        # Break out of the loop if the end node is reached
+        # Si el nodo actual es el nodo final, termina
         if current_node == end:
             break
         
@@ -24,7 +24,7 @@ def dijkstradyn(graph, start, end=None):
                 shortest_distances[neighbor] = new_distance
                 predecessor[neighbor] = current_node
 
-    # Reconstruct the shortest path from start to end
+    # Recontrsuye el camino más corto con los nodos anteriores
     path = []
     current_node = end
     while current_node != start:
@@ -39,7 +39,7 @@ def dijkstradyn(graph, start, end=None):
     return shortest_distances[str(len(shortest_distances)-1)], path
 
 
-#show graph as image
+#Función para gráficar el grafo
     
 def showgraph(graph):
     import networkx as nx

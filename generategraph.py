@@ -1,6 +1,6 @@
 import random
 
-def generate_fully_connected_graphs_with_random_weights(n_nodes, n_graphs):
+def generargrafoconectado(n_nodes, n_graphs):
     graphs = []
     for _ in range(n_graphs):
         graph = {}
@@ -8,23 +8,23 @@ def generate_fully_connected_graphs_with_random_weights(n_nodes, n_graphs):
             connections = {}
             for j in range(n_nodes):
                 if i != j:
-                    # Assigning random weights in the range 1 to 10
+                    # Pesos aleatorios de 1 a 10
                     connections[str(j)] = random.randint(1, 10)
             graph[str(i)] = connections
         graphs.append(graph)
     return graphs
 
-# Generate 1 fully connected graph with 16 nodes
+# genera grafos para testeo
 
-graphs64 = generate_fully_connected_graphs_with_random_weights(64, 5)
-graphs32 = generate_fully_connected_graphs_with_random_weights(32, 5)
-graphs16 = generate_fully_connected_graphs_with_random_weights(16, 5)
-graphs8 = generate_fully_connected_graphs_with_random_weights(8, 5)
-graphs4 = generate_fully_connected_graphs_with_random_weights(4, 5)
-graph2 = generate_fully_connected_graphs_with_random_weights(2, 5)
+graphs64 = generargrafoconectado(64, 5)
+graphs32 = generargrafoconectado(32, 5)
+graphs16 = generargrafoconectado(16, 5)
+graphs8 = generargrafoconectado(8, 5)
+graphs4 = generargrafoconectado(4, 5)
+graph2 = generargrafoconectado(2, 5)
 
 
-#export enumerate each graph like graph1 = {graph} for each graph in graphs2, graphs4, graphs8, graphs16, graphs32 and graphs64 to graphs.txt
+# exporta los grafos a archivos txt
 
 def export_graphs(graphs, filename, a):
     with open(filename, 'w') as f:
@@ -39,7 +39,7 @@ export_graphs(graphs4, 'graphs4.txt',4)
 export_graphs(graph2, 'graph2.txt',2)
 
 
-#union all txt files in one txt file
+#junta todos los archivos en uno solo
 
 def union_txt_files(filenames, output_filename):
     with open(output_filename, 'w') as outfile:

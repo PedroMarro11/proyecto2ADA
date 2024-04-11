@@ -1,17 +1,17 @@
 def DijkstraGreedy(graph, start, end=None):
-    # Initialize the distance from the start node to all other nodes
+    #Inicializa la distancia de los nodos
     distance = {node: float('infinity') for node in graph}
     distance[start] = 0
     
-    # Initialize the list of visited nodes
+    # Lista de los nodos visitados
     visited = []
 
-    # Initialize the list of nodes to visit
+    # Lista de nodos a visitar
     nodes = list(graph)
     
-    # While there are nodes to visit
+    # Mientras haya nodos por visitar
     while nodes:
-        # Select the node with the smallest distance
+        # Selecciona el nodo con la menos distancia
         #print(distance) #descomentar para observar funcionamiento 
         min_node = None
         for node in nodes:
@@ -24,20 +24,20 @@ def DijkstraGreedy(graph, start, end=None):
             visited.append(min_node)
             break
         #print(min_node) #descomentar para observar funcionamiento
-        # For each neighbor of the node
+        # Para cada nodo vecino del nodo con la menor distancia
         for neighbor, weight in graph[min_node].items():
-            # Calculate the new distance
+            # Calcular nueva distancia
             new_distance = distance[min_node] + weight
             
-            # If the new distance is smaller than the current distance
+            # Si la nueva distancia es menor
             if new_distance < distance[neighbor]:
-                # Update the distance
+                # Actualizar distancia
                 distance[neighbor] = new_distance
 
-        # Mark the node as visited
+        # Agregar el nodo a la lista de nodos visitados
         visited.append(min_node)
 
-        # Remove the node from the list of nodes to visit
+        # remover el nodo de la lista de nodos a visitar
         nodes.remove(min_node)
 
     return visited, distance[str(len(distance)-1)], distance
